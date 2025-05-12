@@ -1,0 +1,32 @@
+import sqlite3
+
+# Connect or create DB
+conn = sqlite3.connect('vending.db')
+cursor = conn.cursor()
+
+# Create products table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    category TEXT NOT NULL,
+    price REAL,
+    image_url TEXT
+)
+''')
+
+# Create user log table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS user_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    age_group TEXT,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+''')
+
+# Insert sample data
+products = [
+    ('Chocolate Bar', 'child', 10.0, 'https://i.imgur.com/Zv4Qb0K.png'),
+    ('Gummy Bears', 'child', 12.0, 'https://i.imgur.com/MjN5DVP.png'),
+    ('Pen Pack', 'adult', 15.0, 'https://i.imgur.com/x2Q2bJz.png'),
+    ('Notebook', 'adult', 25.0, 'https://i.imgur.com/C
